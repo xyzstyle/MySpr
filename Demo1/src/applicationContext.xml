@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="teacher" class="xyz.Teacher"  >
+
+        <!--
+        <property name="id" value="1"/>
+        <property name="name" value="zxy"/>
+        <property name="age" value="23"/>
+        -->
+        <!--
+        <constructor-arg value="1"/>
+        <constructor-arg value="z"/>
+        <constructor-arg value="23"/>
+        -->
+
+        <!--
+        <constructor-arg index="1" value="z"/>
+        <constructor-arg index="2" value="23"/>
+        <constructor-arg index="0" value="22"/>
+        -->
+
+        <constructor-arg name="name" value="z"/>
+        <constructor-arg name="age" value="23"/>
+        <constructor-arg name="id" value="22"/>
+
+    </bean>
+    <bean id="course" class="xyz.Course" p:hour="88" p:teacher-ref="teacher">
+        <property name="id" value="1"/>
+        <property name="name" value="Java"/>
+        <!--
+        <property name="hour" value="64"/>
+        <property name="teacher" ref="teacher"/>
+        -->
+    </bean>
+
+</beans>

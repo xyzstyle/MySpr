@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+"
+
+>
+    <!--配置数据库相关内容，增加对事务的支持-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/db_jw"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+    <!--配置事务管理器,名称为txManager-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--事务的支持-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+
+    <bean id="userDao" class="xyz.dao.impl.UserDaoImpl">
+
+    </bean>
+    <bean id="userService" class="xyz.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="logBefore" class="xyz.aop.LogBefore"/>
+    <bean id="logAfter" class="xyz.aop.LogAfter"/>
+    <aop:config>
+        <aop:pointcut id="pointCut" expression="execution(public void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))
+                                                or execution(public * xyz.service.impl.UserServiceImpl.deleteUserById(int))"/>
+        <aop:advisor advice-ref="logBefore" pointcut-ref="pointCut"/>
+
+
+
+    </aop:config>
+
+    <aop:config>
+        <aop:pointcut id="pointCut2" expression="execution(public void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))"/>
+        <aop:advisor advice-ref="logAfter" pointcut-ref="pointCut2"/>
+    </aop:config>
+</beans>

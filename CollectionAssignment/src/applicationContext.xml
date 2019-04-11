@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="collection" class="xyz.CollectionAssignment">
+        <property name="names">
+            <array>
+                <value>Tom</value>
+                <value>Andy</value>
+                <value>Marry</value>
+            </array>
+        </property>
+        <property name="colorList">
+            <list>
+                <value>red</value>
+                <value>green</value>
+                <value>blue</value>
+            </list>
+        </property>
+        <property name="hobbySet">
+            <set>
+                <value>football</value>
+                <value>basketball</value>
+                <value>tennis</value>
+            </set>
+        </property>
+        <property name="ageMap">
+            <map>
+                <entry key="Tom" value="22"/>
+                <entry key="Andy" value="33"/>
+                <entry key="Mary" value="17"/>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="Tom">football</prop>
+                <prop key="Andy">basketball</prop>
+                <prop key="Marry">tennis</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
