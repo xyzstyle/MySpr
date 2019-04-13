@@ -24,6 +24,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addUser(User user) {
+        //userDao=null;
         userDao.addUser(user);
     }
 

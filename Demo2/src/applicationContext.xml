@@ -36,6 +36,8 @@
 
     <bean id="logBefore" class="xyz.aop.LogBefore"/>
     <bean id="logAfter" class="xyz.aop.LogAfter"/>
+    <bean id="logException" class="xyz.aop.LogException"/>
+    <bean id="logRound" class="xyz.aop.LogRound"/>
     <aop:config>
         <aop:pointcut id="pointCut" expression="execution(public void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))
                                                 or execution(public * xyz.service.impl.UserServiceImpl.deleteUserById(int))"/>
@@ -48,5 +50,16 @@
     <aop:config>
         <aop:pointcut id="pointCut2" expression="execution(public void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))"/>
         <aop:advisor advice-ref="logAfter" pointcut-ref="pointCut2"/>
+    </aop:config>
+
+
+    <aop:config>
+        <aop:pointcut id="pointCut3" expression="execution(public void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))"/>
+        <aop:advisor advice-ref="logException" pointcut-ref="pointCut3"/>
+    </aop:config>
+
+    <aop:config>
+        <aop:pointcut id="pointCut4"  expression="execution(public  void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))"/>
+        <aop:advisor advice-ref="logRound" pointcut-ref="pointCut4"/>
     </aop:config>
 </beans>
