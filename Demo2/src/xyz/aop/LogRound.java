@@ -18,6 +18,11 @@ public class LogRound implements MethodInterceptor{
 
             //后置通知
             System.out.println("后置内容1");
+            System.out.println("target:"+invocation.getThis());
+            System.out.println("Method Name;" + invocation.getMethod().getName());
+            System.out.println("Method args number:"+invocation.getArguments().length);
+            System.out.println("Method return value:"+result);
+            System.out.println("后置内容1结束");
         } catch (Exception e) {
             //方法体，异常通知
             System.out.println("异常内容1");

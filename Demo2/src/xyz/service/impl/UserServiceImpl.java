@@ -29,6 +29,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public int updateUser(User user) {
+        userDao=null;
+        userDao.addUser(user);
+        System.out.println("update user");
+        return 2;
+    }
+
+    @Override
     public void deleteUserById(int id) {
         System.out.println("delete User");
     }

@@ -12,5 +12,6 @@ public class LogAfter implements AfterReturningAdvice {
         System.out.println("Method Name;" + method.getName());
         System.out.println("Method args number:"+args.length);
         System.out.println("Method return value:"+returnValue);
+        System.out.println("End of After Advice");
     }
 }

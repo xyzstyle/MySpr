@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-"
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 
 >
     <!--配置数据库相关内容，增加对事务的支持-->
@@ -38,6 +38,7 @@
     <bean id="logAfter" class="xyz.aop.LogAfter"/>
     <bean id="logException" class="xyz.aop.LogException"/>
     <bean id="logRound" class="xyz.aop.LogRound"/>
+    <!--<bean id="logAnnotation" class="xyz.aop1.LogAspectAnnotation"/>-->
     <aop:config>
         <aop:pointcut id="pointCut" expression="execution(public void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))
                                                 or execution(public * xyz.service.impl.UserServiceImpl.deleteUserById(int))"/>
@@ -62,4 +63,8 @@
         <aop:pointcut id="pointCut4"  expression="execution(public  void xyz.service.impl.UserServiceImpl.addUser(xyz.entity.User))"/>
         <aop:advisor advice-ref="logRound" pointcut-ref="pointCut4"/>
     </aop:config>
+
+    <!--开启支持AOP注解-->
+    <aop:aspectj-autoproxy/>
+    <context:component-scan base-package="xyz.aop1"/>
 </beans>
